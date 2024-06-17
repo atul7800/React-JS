@@ -4,6 +4,7 @@ import Chai from "./chai";
 // Import variable should always be in cammel case, e.g. Chai
 
 function App() {
+  // return must contain only one parent element, that's why we hae used a div to wrap and treat 2 elements as 1
   return (
     <>
     <h1>Chai aur React</h1>
