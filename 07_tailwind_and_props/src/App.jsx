@@ -11,7 +11,8 @@ function App() {
     <>
       <h2 className='bg-green-400 p-2 pt-5 rounded-xl mb-5'>Tailwind test</h2>
 
-      <Card/>
+      <Card userName = "Laddo" btnName = "Click me" /> <br/>
+      <Card userName = "Laddo" btnName = "Vsist profile"/>
 
     </>
     
