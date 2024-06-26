@@ -8,7 +8,7 @@ function App() {
 
   const addValue =  () => {
     //Interview question
-    //counter = counter + 1;
+    // counter = counter + 1;
 
     // setCounter(counter + 1)
     // setCounter(counter + 1)

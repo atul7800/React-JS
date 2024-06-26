@@ -16,14 +16,6 @@ function App() {
       console.log(`Value can't be more than 20`);
     }
     
-    /* //Interview question
-    counter = counter + 1;
-    setCounter(prevCounterValue => prevCounterValue + 1)
-    setCounter(prevCounterValue => prevCounterValue + 1)
-    setCounter(prevCounterValue => prevCounterValue + 1)
-    setCounter(prevCounterValue => prevCounterValue + 1)
-    setCounter(prevCounterValue => prevCounterValue + 1)
-    */
   }
 
   const removeValue = () => {
