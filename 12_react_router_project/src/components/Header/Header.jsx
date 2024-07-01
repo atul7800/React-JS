@@ -13,6 +13,7 @@ export default function Header() {
               alt="Logo"
             />
           </Link>
+
           <div className="flex items-center lg:order-2">
             <Link
               to="#"
@@ -27,6 +28,7 @@ export default function Header() {
               Get started
             </Link>
           </div>
+
           <div
             className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
             id="mobile-menu-2"
@@ -51,6 +53,17 @@ export default function Header() {
                   }
                 >
                   About
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink
+                  to="/contact"
+                  className={() =>
+                    `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                  }
+                >
+                  Contact
                 </NavLink>
               </li>
             </ul>
