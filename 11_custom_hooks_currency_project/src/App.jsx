@@ -6,12 +6,13 @@ function App() {
   const [amount, setAmount] = useState(0);
   const [from, setFrom] = useState("usd");
   const [to, setTo] = useState("inr");
+  const [currencyInfoState, setCurrencyInfoState] = useState({});
   const [convertedAmount, setConvertedAmount] = useState(0);
 
   const currencyInfo = useCurrencyInfo(from);
 
   const options = Object.keys(currencyInfo);
-  console.log(`Options : ${options}`);
+  //console.log(`Options : ${options}`);
 
   const swap = () => {
     setFrom(to);
@@ -44,8 +45,8 @@ function App() {
                 label="From"
                 amount={amount}
                 currencyOptions={options}
-                onCurrencyChange={() => {
-                  setAmount(amount); //doubt | Atul [why are we calling setAmount, shouldn't we call setConvertedAmount because we want to updated the to amount not the from amount when currency in from is changed ]
+                onCurrencyChange={(e) => {
+                  setFrom(e);
                 }}
                 onAmountChange={(amount) => {
                   setAmount(amount);
@@ -67,10 +68,10 @@ function App() {
                 label="To"
                 amount={convertedAmount}
                 currencyOptions={options}
-                onCurrencyChange={(currency) => {
-                  setTo(currency);
+                onCurrencyChange={(e) => {
+                  setTo(e);
                 }}
-                selectCurrency={from} //doubt | Atul, [why are passing from instead of to]
+                selectCurrency={to} //doubt | Atul, [why are passing from instead of to]
                 amountDisable
               />
             </div>
