@@ -1,7 +1,11 @@
 import React from "react";
 
 function About() {
-  return <div>About</div>;
+  return (
+    <div width={300} bg-gray-500 >
+      About
+    </div>
+  );
 }
 
 export default About;
