@@ -24,6 +24,7 @@ function App() {
   ///
 
   return (
+    // 6: using context provider in a component | 3: passing prop to the context
     <ThemeProvider value={{ themeMode, darkTheme, lightTheme }}>
       <div className="flex flex-wrap min-h-screen items-center">
         <div className="w-full">
