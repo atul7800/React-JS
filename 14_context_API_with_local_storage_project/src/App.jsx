@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { TodoProvider } from "./contexts";
 
@@ -28,6 +28,20 @@ function App() {
       )
     );
   };
+
+  //get the already added todos to display when we load the application
+  useEffect(() => {
+    const todos = JSON.parse(localStorage.getItem("todos"));
+
+    //checking if todos isn't empty | checking if array received in todos isn't empty
+    if (todos && todos.length > 0) {
+      setTodos(todos);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos))
+  }, [todos])
 
   return (
     <TodoProvider
