@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import ComponentOne from "./components/ComponentOne";
 
 function App() {
   const [value, setValue] = useState(0);
