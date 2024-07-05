@@ -1,19 +1,22 @@
 import React from "react";
 
-function CountryCard() {
+function CountryCard({ countriesDetails }) {
   return (
-    <a class="country-card" href="/country.html?name=Wallis and Futuna">
-      <img src="https://flagcdn.com/wf.svg" alt="Wallis and Futuna flag" />
-      <div class="card-text">
-        <h3 class="card-title">Wallis and Futuna</h3>
+    <a className="country-card" href="/country.html?name=Wallis and Futuna">
+      <img src={countriesDetails[4]} alt="Wallis and Futuna flag" />
+      <div className="card-text">
+        <h3 className="card-title">{countriesDetails[0]}</h3>
         <p>
-          <b>Population: </b>11,750
+          <b>Population: </b>
+          {countriesDetails[1].toLocaleString("en-IN")}
         </p>
         <p>
-          <b>Region: </b>Oceania
+          <b>Region: </b>
+          {countriesDetails[2]}
         </p>
         <p>
-          <b>Capital: </b>Mata-Utu
+          <b>Capital: </b>
+          {countriesDetails[3]}
         </p>
       </div>
     </a>
