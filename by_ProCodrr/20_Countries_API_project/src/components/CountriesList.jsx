@@ -9,6 +9,9 @@ function CountriesList({ query }) {
     fetch("https://restcountries.com/v3.1/all")
       .then((res) => res.json())
       .then((data) => setCountriesData(data));
+
+    /*Below line will be returned once CountriesList component gets unmounted. When we move from one component to different component that time previous component gets unmounted and new one gets loaded*/
+    // return console.log("Cleaning up");
   }, []);
 
   return (
