@@ -2,7 +2,10 @@ import React from "react";
 
 function CountryCard({ countriesDetails }) {
   return (
-    <a className="country-card" href="/country.html?name=Wallis and Futuna">
+    <a
+      className="country-card"
+      href={`/country-detail?name=${countriesDetails[0]}?name=${countriesDetails[0]}`}
+    >
       <img src={countriesDetails[4]} alt="Wallis and Futuna flag" />
       <div className="card-text">
         <h3 className="card-title">{countriesDetails[0]}</h3>
