@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "../css/country.css";
+import { Link, useParams } from "react-router-dom";
 
 function CountryDetail() {
-  const countryName = new URLSearchParams(location.search).get("name");
+  const params = useParams();
+  const countryName = params.country;
+  console.log(`Country name in url ${countryName}`);
 
   const [countryData, setCountryData] = useState(null);
+  const [notFound, setNotFound] = useState(false);
+  const [borderCountries, setBorderCountries] = useState();
 
   useEffect(() => {
     fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true`)
@@ -23,13 +28,16 @@ function CountryDetail() {
             .map((currency) => currency.name)
             .join(", "),
           languages: Object.values(data.languages).join(", "),
-          borders: data.borders
-            ? data.borders.join(", ")
-            : "Water locked country",
           flag: data.flags.svg,
+          borders: data.borders ? data.borders : "Water locked country",
         });
-      });
-  }, []);
+      })
+      .catch((err) => setNotFound(true));
+  }, [countryName]);
+
+  if (notFound) {
+    return <div>Country not found.</div>;
+  }
 
   return countryData === null ? (
     "Loading..."
@@ -78,7 +86,8 @@ function CountryDetail() {
               </p>
             </div>
             <div className="border-countries">
-              <b>Border Countries: {countryData.borders}</b>&nbsp;
+              <b>Border Countries:</b>&nbsp;
+              {countryData.borders.join(", ")}
             </div>
           </div>
         </div>

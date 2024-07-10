@@ -3,10 +3,7 @@ import { Link } from "react-router-dom";
 
 function CountryCard({ countriesDetails }) {
   return (
-    <Link
-      className="country-card"
-      to={`/country-detail?name=${countriesDetails[0]}`}
-    >
+    <Link className="country-card" to={`/${countriesDetails[0]}`}>
       <img src={countriesDetails[4]} alt="Wallis and Futuna flag" />
       <div className="card-text">
         <h3 className="card-title">{countriesDetails[0]}</h3>
