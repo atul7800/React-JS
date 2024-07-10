@@ -4,7 +4,7 @@ function CountryCard({ countriesDetails }) {
   return (
     <a
       className="country-card"
-      href={`/country-detail?name=${countriesDetails[0]}?name=${countriesDetails[0]}`}
+      href={`/country-detail?name=${countriesDetails[0]}string`}
     >
       <img src={countriesDetails[4]} alt="Wallis and Futuna flag" />
       <div className="card-text">
