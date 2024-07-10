@@ -25,7 +25,7 @@ function CountriesList({ query }) {
           countriesDetails.push(country.name.common);
           countriesDetails.push(country.population);
           countriesDetails.push(country.region);
-          countriesDetails.push(country.capital?.[0]);
+          countriesDetails.push(country.capital && country.capital.join(", "));
           countriesDetails.push(country.flags.svg);
 
           return (

@@ -1,10 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function CountryCard({ countriesDetails }) {
   return (
-    <a
+    <Link
       className="country-card"
-      href={`/country-detail?name=${countriesDetails[0]}string`}
+      to={`/country-detail?name=${countriesDetails[0]}`}
     >
       <img src={countriesDetails[4]} alt="Wallis and Futuna flag" />
       <div className="card-text">
@@ -22,7 +23,7 @@ function CountryCard({ countriesDetails }) {
           {countriesDetails[3]}
         </p>
       </div>
-    </a>
+    </Link>
   );
 }
 

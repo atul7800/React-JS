@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
+import "../css/country.css";
 
 function CountryDetail() {
   const countryName = new URLSearchParams(location.search).get("name");
 
-  const [countryData, setCountryData] = useState({});
+  const [countryData, setCountryData] = useState(null);
 
   useEffect(() => {
     fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true`)
@@ -16,23 +17,30 @@ function CountryDetail() {
           population: data.population.toLocaleString("en-IN"),
           region: data.region,
           subRegion: data.subregion,
-          capital: data.capital[0],
-          domain: "domain",
-          currencies: Object.values(data.currencies)[0].name,
-          languages: Object.values(data.languages)[0],
-          borders: data.borders,
+          capital: data.capital.join(", "),
+          domain: Object.values(data.tld).join(" | "),
+          currencies: Object.values(data.currencies)
+            .map((currency) => currency.name)
+            .join(", "),
+          languages: Object.values(data.languages).join(", "),
+          borders: data.borders
+            ? data.borders.join(", ")
+            : "Water locked country",
+          flag: data.flags.svg,
         });
       });
   }, []);
 
-  return (
+  return countryData === null ? (
+    "Loading..."
+  ) : (
     <main>
       <div className="country-details-container">
-        <span className="back-button">
+        <span className="back-button" onClick={() => window.history.back()}>
           <i className="fa-solid fa-arrow-left"></i>&nbsp; Back
         </span>
         <div className="country-details">
-          <img src="" alt="" />
+          <img src={countryData.flag} alt="" />
           <div className="details-text-container">
             <h1>{countryData.name}</h1>
             <div className="details-text">
@@ -58,7 +66,7 @@ function CountryDetail() {
               </p>
               <p>
                 <b>Top Level Domain: </b>
-                <span className="top-level-domain"></span>
+                <span className="top-level-domain">{countryData.domain}</span>
               </p>
               <p>
                 <b>Currencies: </b>
