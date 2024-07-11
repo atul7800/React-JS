@@ -18,6 +18,23 @@ body.dark {
     --elements-color: hsl(209, 23%, 22%);
 }
 
+main.dark {
+    --background-color: hsl(207, 26%, 17%); 
+    --text-color: white;
+    --elements-color: hsl(209, 23%, 22%);
+}
+main.dark {
+    --background-color: hsl(207, 26%, 17%); 
+    --text-color: white;
+    --elements-color: hsl(209, 23%, 22%);
+}
+
+header.dark {
+    --background-color: hsl(207, 26%, 17%); 
+    --text-color: white;
+    --elements-color: hsl(209, 23%, 22%);
+}
+
 main {
     padding: 24px;
 }
@@ -31,6 +48,9 @@ a {
     box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.1);
     padding-inline: 24px;
     background-color: var(--elements-color);
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
 
 .header-content {

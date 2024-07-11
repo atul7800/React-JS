@@ -15,7 +15,7 @@ function CountriesList({ query }) {
     // return console.log("Cleaning up");
   }, []);
 
-  console.log(`countries details - ${JSON.stringify(countriesData, null, 2)}`);
+  // console.log(`countries details - ${JSON.stringify(countriesData, null, 2)}`);
 
   return (
     <>
@@ -41,6 +41,7 @@ function CountriesList({ query }) {
                 <CountryCard
                   key={country.name.common}
                   countriesDetails={countriesDetails}
+                  countriesData={countriesData}
                 />
               );
             })}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../css/country.css";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 
 function CountryDetail() {
   const params = useParams();
@@ -9,12 +9,14 @@ function CountryDetail() {
   const [countryData, setCountryData] = useState(null);
   const [notFound, setNotFound] = useState(false);
   const [borderCountries, setBorderCountries] = useState();
+  const { state } = useLocation();
+  //console.log(JSON.stringify(state, null, 2));
 
   useEffect(() => {
     fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true`)
       .then((res) => res.json())
       .then(([data]) => {
-        console.log(data);
+        //console.log(data);
         setCountryData({
           name: data.name.common,
           nativeName: Object.values(data.name.nativeName)[0].common,
@@ -86,7 +88,6 @@ function CountryDetail() {
             </div>
             <div className="border-countries">
               <b>Border Countries:</b>&nbsp;
-              {console.log(countryData.borders)}
               {typeof countryData.borders != "string"
                 ? countryData.borders.join(", ")
                 : countryData.borders}

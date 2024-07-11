@@ -9,7 +9,7 @@ function Home() {
   return (
     <main>
       <div className="search-filter-container">
-        <SearchBar setQuery={setQuery} />;
+        <SearchBar setQuery={setQuery} />
         <SelectMenu />
       </div>
       {/* {query == "unmount" ? "" : <CountriesList query={query} />} */}
