@@ -12,7 +12,7 @@ function MainContainer() {
   const basket2 = "2";
 
   const handleClick = (btnId) => {
-    console.log(btnId + " Clicked");
+    //console.log(btnId + " Clicked");
     if (btnId === "left") {
       basket1Counter = basket1Counter + 1;
       document.getElementById(basket1).innerText = basket1Counter + " apples";

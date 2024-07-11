@@ -51,6 +51,10 @@
     font-size: 14px;
 }
 
+main{
+    min-height: calc(100vh - 121px);
+}
+
 @media(max-width: 940px) {
     .country-details {
         flex-direction: column;

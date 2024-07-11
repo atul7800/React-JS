@@ -1,24 +1,14 @@
-import React, { useEffect, useState } from "react";
-
-function Header() {
-  const [isDark, setIsDark] = useState(
-    JSON.parse(localStorage.getItem("isDark"))
-  );
-
-  if (isDark) {
-    document.body.classList.add("dark");
-  } else {
-    document.body.classList.remove("dark");
-  }
+function Header({ theme }) {
+  const [isDark, setIsDark] = theme;
 
   function darkLightMode() {
-    document.body.classList.toggle("dark");
+    //document.body.classList.toggle("dark");
     localStorage.setItem("isDark", !isDark);
     setIsDark(!isDark);
   }
 
   return (
-    <header className="header-container">
+    <header className={`header-container ${isDark ? "dark" : ""}`}>
       <div className="header-content">
         <h2 className="title">
           <a href="/">Where in the world?</a>

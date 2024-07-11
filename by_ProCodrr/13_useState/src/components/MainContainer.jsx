@@ -10,7 +10,7 @@ function MainContainer() {
   let [basket2Counter, setbasket2Counter] = useState(0);
 
   const handleClick = (btnId) => {
-    console.log(btnId + " Clicked");
+    //console.log(btnId + " Clicked");
 
     if (btnId === "right" && basket1Counter > 0) {
       basket1Counter--;
