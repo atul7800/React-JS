@@ -5,7 +5,6 @@ import { Link, useParams } from "react-router-dom";
 function CountryDetail() {
   const params = useParams();
   const countryName = params.country;
-  console.log(`Country name in url ${countryName}`);
 
   const [countryData, setCountryData] = useState(null);
   const [notFound, setNotFound] = useState(false);
@@ -87,7 +86,10 @@ function CountryDetail() {
             </div>
             <div className="border-countries">
               <b>Border Countries:</b>&nbsp;
-              {countryData.borders.join(", ")}
+              {console.log(countryData.borders)}
+              {typeof countryData.borders != "string"
+                ? countryData.borders.join(", ")
+                : countryData.borders}
             </div>
           </div>
         </div>

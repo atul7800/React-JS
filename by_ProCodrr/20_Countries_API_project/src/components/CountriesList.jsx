@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CountryCard from "./CountryCard";
+import CountriesListShimmer from "./CountriesListShimmer";
 //import countriesData from "../data/countriesData";
 
 function CountriesList({ query }) {
@@ -14,28 +15,38 @@ function CountriesList({ query }) {
     // return console.log("Cleaning up");
   }, []);
 
-  return (
-    <div className="countries-container">
-      {countriesData
-        .filter((country) =>
-          country.name.common.toLocaleLowerCase().includes(query)
-        )
-        .map((country) => {
-          const countriesDetails = [];
-          countriesDetails.push(country.name.common);
-          countriesDetails.push(country.population);
-          countriesDetails.push(country.region);
-          countriesDetails.push(country.capital && country.capital.join(", "));
-          countriesDetails.push(country.flags.svg);
+  console.log(`countries details - ${JSON.stringify(countriesData, null, 2)}`);
 
-          return (
-            <CountryCard
-              key={country.name.common}
-              countriesDetails={countriesDetails}
-            />
-          );
-        })}
-    </div>
+  return (
+    <>
+      {!countriesData.length ? (
+        <CountriesListShimmer />
+      ) : (
+        <div className="countries-container">
+          {countriesData
+            .filter((country) =>
+              country.name.common.toLocaleLowerCase().includes(query)
+            )
+            .map((country) => {
+              const countriesDetails = [];
+              countriesDetails.push(country.name.common);
+              countriesDetails.push(country.population);
+              countriesDetails.push(country.region);
+              countriesDetails.push(
+                country.capital && country.capital.join(", ")
+              );
+              countriesDetails.push(country.flags.svg);
+
+              return (
+                <CountryCard
+                  key={country.name.common}
+                  countriesDetails={countriesDetails}
+                />
+              );
+            })}
+        </div>
+      )}
+    </>
   );
 }
 
