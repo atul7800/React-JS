@@ -1,6 +1,7 @@
 import React from "react";
 
 function ExpenseForm() {
+  let counter = 0;
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -9,22 +10,16 @@ function ExpenseForm() {
       console.log(value);
     }
   };
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const expense = { ...getFormData(e.target), id: crypto.randomUUID() };
-  //   setExpenses((prevState) => [...prevState, expense]);
-  //   e.target.reset();
-  // };
 
   return (
     <form onSubmit={handleSubmit} className="expense-form">
       <div className="input-container">
         <label htmlFor="title">Title</label>
-        <input id="title" />
+        <input id="title" name="title" />
       </div>
       <div className="input-container">
         <label htmlFor="category">Category</label>
-        <select id="category">
+        <select id="category" name="category">
           <option hidden>Select category</option>
           <option value="grocery">Grocery</option>
           <option value="clothes">Clothes</option>
@@ -35,7 +30,7 @@ function ExpenseForm() {
       </div>
       <div className="input-container">
         <label htmlFor="amount">Amount</label>
-        <input id="amount" />
+        <input id="amount" name="amount" />
       </div>
       <button className="add-btn">Add</button>
     </form>
