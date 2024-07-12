@@ -1,28 +1,25 @@
 import React, { useState } from "react";
 
 function ExpenseForm({ setExpenses }) {
-  const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
-  const [amount, setAmount] = useState("");
-  // console.log(`Title : ${title} | Category : ${category} | Amount : ${amount}`);
+  const [expense, setExpense] = useState({
+    id: crypto.randomUUID(),
+    title: "",
+    category: "",
+    amount: "",
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    //chek the validity of the form manually [not working]
-    // if (!e.target.checkValidity()) {
-    //   console.log("Inside if");
-    //   e.target.reportValidity();
-    //   return;
-    // }
-    //
-
-    const expenses = { title, category, amount, id: crypto.randomUUID() };
-    console.log(expenses);
-    setExpenses((prevValue) => [...prevValue, expenses]);
-
-    e.target.reset();
+    setExpenses((prevValue) => [...prevValue, expense]);
+    resetForm(expense);
   };
+
+  function resetForm(formData) {
+    console.log("reset form called");
+    formData.title = "";
+    formData.category = "";
+    formData.amount = "";
+  }
 
   // const getFormData = (form) => {
   //   const formData = new FormData(form);
@@ -41,8 +38,13 @@ function ExpenseForm({ setExpenses }) {
           required
           id="title"
           name="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={expense.title}
+          onChange={(e) => {
+            setExpense((prevValue) => ({
+              ...prevValue,
+              title: e.target.value,
+            }));
+          }}
         />
       </div>
       <div className="input-container">
@@ -51,8 +53,13 @@ function ExpenseForm({ setExpenses }) {
           required
           id="category"
           name="category"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
+          value={expense.category}
+          onChange={(e) => {
+            setExpense((prevValue) => ({
+              ...prevValue,
+              category: e.target.value,
+            }));
+          }}
         >
           <option value="" hidden>
             Select category
@@ -71,8 +78,13 @@ function ExpenseForm({ setExpenses }) {
           id="amount"
           name="amount"
           type="number"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
+          value={expense.amount}
+          onChange={(e) => {
+            setExpense((prevValue) => ({
+              ...prevValue,
+              amount: e.target.value,
+            }));
+          }}
         />
       </div>
       <button className="add-btn">Add</button>
