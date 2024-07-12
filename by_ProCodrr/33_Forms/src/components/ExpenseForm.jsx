@@ -1,14 +1,21 @@
 import React from "react";
 
-function ExpenseForm() {
-  let counter = 0;
+function ExpenseForm({ setExpenses }) {
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
-    console.log("Before for");
-    for (const value of formData.values()) {
-      console.log(value);
+    setExpenses((prevValue) => [
+      ...prevValue,
+      { ...getFormData(e.target), id: crypto.randomUUID() },
+    ]);
+  };
+
+  const getFormData = (form) => {
+    const formData = new FormData(form);
+    const data = {};
+    for (const [key, value] of formData.entries()) {
+      data[key] = value;
     }
+    return data;
   };
 
   return (

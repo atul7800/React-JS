@@ -6,14 +6,13 @@ import ContextMenu from "./components/ContextMenu";
 import ExpenseData from "./ExpenseData";
 
 function App() {
-  const [count, setCount] = useState(0);
   const [expenses, setExpenses] = useState(ExpenseData);
 
   return (
     <main>
       <h1>Track Your Expense</h1>
       <div className="expense-tracker">
-        <ExpenseForm />
+        <ExpenseForm setExpenses={setExpenses} />
         <ExpenceTable expenses={expenses} />
         <ContextMenu />
       </div>
