@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 function ExpenceTable({ expenses }) {
+  //const [totalAmount, setTotalAmount] = useState(0);
+  let total = 0;
+
+  //update total amount
+  expenses.map((expense) => {
+    total += expense.amount;
+  });
+
   return (
     <table className="expense-table">
       <thead>
@@ -9,11 +17,11 @@ function ExpenceTable({ expenses }) {
           <th>
             <select>
               <option value="">All</option>
-              <option value="grocery">Grocery</option>
-              <option value="clothes">Clothes</option>
-              <option value="bills">Bills</option>
-              <option value="education">Education</option>
-              <option value="medicine">Medicine</option>
+              <option value="Grocery">Grocery</option>
+              <option value="Clothes">Clothes</option>
+              <option value="Bills">Bills</option>
+              <option value="Bikes">Bikes</option>
+              <option value="Medicine">Medicine</option>
             </select>
           </th>
           <th className="amount-column">
@@ -52,7 +60,7 @@ function ExpenceTable({ expenses }) {
         <tr>
           <th>Total</th>
           <th></th>
-          <th>₹8100</th>
+          <th>{total}</th>
         </tr>
       </tbody>
     </table>
