@@ -75,6 +75,16 @@ main {
     display: flex;
     flex-direction: column;
     margin-bottom: 12px;
+    position: relative;
+    margin-top: 5px;
+}
+
+.warningMsg{
+    position: absolute;
+    font-size: 12px;
+    color: maroon;
+    top: 100%;
+    margin: 0;
 }
 
 .input-container label {

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import CustomInput from "./CustomInput";
+import CustomSelect from "./CustomSelect";
 
 function ExpenseForm({ setExpenses }) {
   const [warnings, setWarnings] = useState({});
@@ -75,17 +77,15 @@ function ExpenseForm({ setExpenses }) {
 
   return (
     <form onSubmit={handleSubmit} className="expense-form">
-      <div className="input-container">
-        <label htmlFor="title">Title</label>
-        <input
-          id="title"
-          name="title"
-          value={expense.title}
-          onChange={handleOnChange}
-        />
-        <p className="warningMsg">{warnings.Title}</p>
-      </div>
-      <div className="input-container">
+      <CustomInput
+        label={"Title"}
+        id={"title"}
+        name={"title"}
+        value={expense.title}
+        handleOnChange={handleOnChange}
+        errorMsg={warnings.Title}
+      />
+      {/* <div className="input-container">
         <label htmlFor="category">Category</label>
         <select
           id="category"
@@ -103,18 +103,26 @@ function ExpenseForm({ setExpenses }) {
           <option value="Medicine">Medicine</option>
         </select>
         <p className="warningMsg">{warnings.Category}</p>
-      </div>
-      <div className="input-container">
-        <label htmlFor="amount">Amount</label>
-        <input
-          id="amount"
-          name="amount"
-          type="number"
-          value={expense.amount}
-          onChange={handleOnChange}
-        />
-        <p className="warningMsg">{warnings.Amount}</p>
-      </div>
+      </div> */}
+
+      <CustomSelect
+        label={"Category"}
+        id={"category"}
+        name={"category"}
+        value={expense.category}
+        handleOnChange={handleOnChange}
+        defaultOption={"Select category"}
+        options={["Grocey", "Clothes", "Education", "Bikes", "Medicine"]}
+        errorMsg={warnings.Category}
+      />
+      <CustomInput
+        label={"Amount"}
+        id={"amount"}
+        name={"amount"}
+        value={expense.amount}
+        handleOnChange={handleOnChange}
+        errorMsg={warnings.Amount}
+      />
       <button className="add-btn">Add</button>
     </form>
   );
