@@ -3,15 +3,18 @@ import CustomInput from "./CustomInput";
 import CustomSelect from "./CustomSelect";
 
 function ExpenseForm({ setExpenses }) {
-  const [warnings, setWarnings] = useState({});
-  const errorsData = {};
+  const errorsData = {}; // to store all the error messages
+  const [warnings, setWarnings] = useState({}); //to manage the state of error msgs on ui.
+  const emailRegex = "/^[w-.]+@([w-]+.)+[w-]{2,4}$/";
 
   const [expense, setExpense] = useState({
     title: "",
     category: "",
     amount: "",
+    email: "",
   });
 
+  // This function runs everytime there is any change in the form fields
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setExpense((prevValue) => ({
@@ -20,14 +23,31 @@ function ExpenseForm({ setExpenses }) {
     }));
   };
 
+  // This function will be called once form is submitted to reset the form
   function resetForm() {
     setExpense({
       title: "",
       category: "",
       amount: "",
+      email: "",
     });
   }
 
+  // This object will be used inside validateFormData() to validate the form inputs
+  const validationConfig = {
+    title: [{ required: true, message: "Please enter title" }],
+    category: [{ required: true, message: "Please select category" }],
+    amount: [
+      { required: true, message: "Please enter an amount" },
+      { minAmount: 1, message: "Amount should be greater than 0" },
+    ],
+    email: [
+      { required: true, message: "Please enter an email" },
+      { pattern: { emailRegex }, message: "Enter a valid email" },
+    ],
+  };
+
+  // This function will be called before submitting the form to validate the inputs
   const validateFormData = () => {
     /* Method 1
     const requiredFields = ["title", "category", "amount"];
@@ -37,14 +57,35 @@ function ExpenseForm({ setExpenses }) {
       }
     });
     */
-    // Method 2
-
+    /*Method 2
     const requiredFileds = ["Title", "Category", "Amount"];
     requiredFileds.forEach((field) => {
       if (!expense[field.toLowerCase()]) {
         errorsData[field] = `${field} can't be empty`;
       }
+    }); */
+    // Method 3
+    Object.entries(expense).map(([key, value]) => {
+      validationConfig[key].some((rule) => {
+        if (rule.required && !value) {
+          errorsData[key] = rule.message;
+          return true;
+        }
+
+        if (rule.minAmount && value <= 0) {
+          errorsData[key] = rule.message;
+          return true;
+        }
+
+        if (rule.required && !value) {
+          errorsData[key] = rule.message;
+          return true;
+        }
+
+        if(rule.pattern && emailRegex.test())
+      });
     });
+
     setWarnings(errorsData);
     return errorsData;
   };
@@ -52,8 +93,8 @@ function ExpenseForm({ setExpenses }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Check if there are any values inside errorsData which is returned by  validateFormData(). If any value is there that means form is not filled properly, hence return from here without adding the data inside setExpenses array.
     const validationResult = validateFormData();
-
     if (Object.keys(validationResult).length) {
       return;
     }
@@ -85,25 +126,6 @@ function ExpenseForm({ setExpenses }) {
         handleOnChange={handleOnChange}
         errorMsg={warnings.Title}
       />
-      {/* <div className="input-container">
-        <label htmlFor="category">Category</label>
-        <select
-          id="category"
-          name="category"
-          value={expense.category}
-          onChange={handleOnChange}
-        >
-          <option value="" hidden>
-            Select category
-          </option>
-          <option value="Grocery">Grocery</option>
-          <option value="Clothes">Clothes</option>
-          <option value="Bills">Bills</option>
-          <option value="Bikes">Bikes</option>
-          <option value="Medicine">Medicine</option>
-        </select>
-        <p className="warningMsg">{warnings.Category}</p>
-      </div> */}
 
       <CustomSelect
         label={"Category"}
@@ -115,6 +137,7 @@ function ExpenseForm({ setExpenses }) {
         options={["Grocey", "Clothes", "Education", "Bikes", "Medicine"]}
         errorMsg={warnings.Category}
       />
+
       <CustomInput
         label={"Amount"}
         id={"amount"}

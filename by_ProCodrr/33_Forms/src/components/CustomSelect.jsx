@@ -18,8 +18,12 @@ function CustomSelect({
           {defaultOption}
         </option>
         {options.map((optiona) => {
-          //   <option value={optiona}>{optiona}</option>;
-          console.log(`options ${optiona}`);
+          return (
+            <option key={crypto.randomUUID()} value={optiona}>
+              {optiona}
+            </option>
+          );
+          //console.log(`options ${optiona}`);
         })}
       </select>
       <p className="warningMsg">{errorMsg}</p>
