@@ -74,7 +74,7 @@ main {
 .input-container {
     display: flex;
     flex-direction: column;
-    margin-bottom: 12px;
+    margin-bottom: 20px;
     position: relative;
     margin-top: 5px;
 }

@@ -5,7 +5,7 @@ import CustomSelect from "./CustomSelect";
 function ExpenseForm({ setExpenses }) {
   const errorsData = {}; // to store all the error messages
   const [warnings, setWarnings] = useState({}); //to manage the state of error msgs on ui.
-  const emailRegex = "/^[w-.]+@([w-]+.)+[w-]{2,4}$/";
+  const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
   const [expense, setExpense] = useState({
     title: "",
@@ -38,11 +38,11 @@ function ExpenseForm({ setExpenses }) {
     title: [{ required: true, message: "Please enter title" }],
     category: [{ required: true, message: "Please select category" }],
     amount: [
-      { required: true, message: "Please enter an amount" },
+      { required: true, message: "Please enter amount" },
       { minAmount: 1, message: "Amount should be greater than 0" },
     ],
     email: [
-      { required: true, message: "Please enter an email" },
+      { required: true, message: "Please enter email" },
       { pattern: { emailRegex }, message: "Enter a valid email" },
     ],
   };
@@ -82,7 +82,13 @@ function ExpenseForm({ setExpenses }) {
           return true;
         }
 
-        if(rule.pattern && emailRegex.test())
+        if (rule.required && !value) {
+          errorsData[key] = rule.message;
+        }
+
+        if (value && !emailRegex.test(value)) {
+          errorsData[key] = rule.message;
+        }
       });
     });
 
@@ -93,7 +99,7 @@ function ExpenseForm({ setExpenses }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Check if there are any values inside errorsData which is returned by  validateFormData(). If any value is there that means form is not filled properly, hence return from here without adding the data inside setExpenses array.
+    // Check if there are any values inside errorsData which is returned by validateFormData(). If any value is there that means form is not filled properly, hence return from here without adding the data inside setExpenses array.
     const validationResult = validateFormData();
     if (Object.keys(validationResult).length) {
       return;
@@ -124,7 +130,7 @@ function ExpenseForm({ setExpenses }) {
         name={"title"}
         value={expense.title}
         handleOnChange={handleOnChange}
-        errorMsg={warnings.Title}
+        errorMsg={warnings.title}
       />
 
       <CustomSelect
@@ -135,7 +141,7 @@ function ExpenseForm({ setExpenses }) {
         handleOnChange={handleOnChange}
         defaultOption={"Select category"}
         options={["Grocey", "Clothes", "Education", "Bikes", "Medicine"]}
-        errorMsg={warnings.Category}
+        errorMsg={warnings.category}
       />
 
       <CustomInput
@@ -144,8 +150,18 @@ function ExpenseForm({ setExpenses }) {
         name={"amount"}
         value={expense.amount}
         handleOnChange={handleOnChange}
-        errorMsg={warnings.Amount}
+        errorMsg={warnings.amount}
       />
+
+      <CustomInput
+        label={"Email"}
+        id={"email"}
+        name={"email"}
+        value={expense.email}
+        handleOnChange={handleOnChange}
+        errorMsg={warnings.email}
+      />
+
       <button className="add-btn">Add</button>
     </form>
   );
